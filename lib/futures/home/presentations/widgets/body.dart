@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '/futures/home/presentations/widgets/task_item.dart';
 import '../../domain/models/task_item_model.dart';
 import '../manager/home_controller.dart';
+import 'not_found.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -16,11 +17,14 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-        builder: (controller) => RefreshIndicator(
+    return GetBuilder<HomeController>(builder: (controller) {
+      return controller.tasks.isNotEmpty
+          ? RefreshIndicator(
               onRefresh: () => _onRefresh(controller),
               child: _lisView(controller),
-            ));
+            )
+          : const NotFound();
+    });
   }
 
   Widget _lisView(controller) => ListView.builder(

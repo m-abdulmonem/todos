@@ -73,5 +73,6 @@ class HomeController extends GetxController {
     loadTasks();
 
     Get.back();
+
   }
 }
